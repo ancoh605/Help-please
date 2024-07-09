@@ -1,0 +1,41 @@
+# This program will calculate how long will it take
+# for the kudzu to cover a specified number of acres
+
+def main():
+    acres = input('Enter number of acres: ')
+    get_user_inputs(acres)
+    existing_kudzu = int(input('Enter number of existing patches of kudzu: '))
+    display_message(acres, existing_kudzu)
+
+
+def get_user_inputs(acres):
+    # Validate user input for acres
+    while not acres.isnumeric():
+        print('Error: acreage must be an integer > 0')
+        acres = input('Enter number of acres: ')
+        acres = float(acres)
+        existing_kudzu = input('Enter number of existing patches of kudzu: ')
+        while not existing_kudzu.isnumeric():
+            print('Error: acreage must be an integer > 0')
+            existing_kudzu = input('Enter number of existing patches of kudzu: ')
+            existing_kudzu = float(existing_kudzu)
+
+
+def display_message(acres, existing_kudzu):
+    kudzu = .75
+    growth_rate = 1.9
+    acres_in_sqft = 43560
+    existing_kudzu = existing_kudzu * kudzu
+    sqft_acres = float(acres_in_sqft * acres)
+
+    count = 0
+    while existing_kudzu < sqft_acres:
+        existing_kudzu = existing_kudzu * growth_rate
+        count = count + 1
+    acres_converted = existing_kudzu / acres_in_sqft
+    print("In", count, "days,", acres, "acres (and then some) will be covered with kudzu! "
+                                       "\nFinal kudzu patch area: ", format(existing_kudzu, '.2f'),
+          "square feet or", format(acres_converted, '.2f'), "acres")
+
+
+main()
