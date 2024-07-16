@@ -1,0 +1,67 @@
+# Assignment 3: Read a text file and generate the following information:
+#   1) Total word count (number of words in the file)
+#   2) Total stopword count (number of stopwords in the file)
+#   3) Dictionary of words (excluding stopwords), and their frequencies, that occur >= 100 times
+
+# this import is needed to reference the String constant, string.punctuation
+import string
+
+
+# Main logic that calls the functions for this program. Do NOT modify.
+def main():
+    # Call create_stopwords_list() which returns a list of stopwords
+    stopwords_list = create_stopwords_list()
+
+    # Call calculate_word_frequencies(stopwords_list) which returns a dictionary of word_frequencies (key=word, value=frequency)
+    word_frequencies = calculate_word_frequencies(stopwords_list)
+
+    # Display the results as shown in the assignment description
+    display_results(word_frequencies)
+
+
+# This function creates a list of stopwords from the contents of the stopwords.txt file.
+# Open and read the stopwords.txt file.
+# Each line in the file contains a stopword to be added to the stopwords list.
+# Open the file with the encoding argument, like this: open(filename, 'r', encoding='utf8')
+def create_stopwords_list():
+    filename = 'stopwords.txt'
+
+
+# This function creates a word_frequencies dictionary where
+#   key = word from the file
+#   value = frequency, i.e., the number of times the word appears in the file
+# Open and read the wizard-of-oz.txt file. Use the encoding argument, like this: open(filename, 'r', encoding='utf8')
+# Call tokenize_text(line_of_text) for each line in the file to obtain a list of the tokenized words in the line.
+# For each word, if it is not a stopword, increment its frequency in the dictionary;
+#    otherwise, increment the stopword counter if the word is in the stopwords list.
+# HINT: The file only needs to be read ONCE. Within the for-loop, you can tokenize, determine word frequencies, and count total words/stopwords.
+# After reading the file, display the total number of words, and total number of stopwords.
+def calculate_word_frequencies(stopwords):
+    filename = 'wizard-of-oz.txt'
+
+
+# This function creates a list of tokenized words from a single line of text.
+# The list of words is created from the line_of_text parameter by using the split function.
+# Any leading/trailing punctuation is removed from each word in the list.
+# Each word is converted to lower case, and then this list of words is returned.
+# Refer to Text Analysis slides for examples.
+def tokenize_text(line_of_text):
+    tokenized_words = []
+
+
+# This function sorts the dictionary of word_frequencies in descending order,
+#     and displays those that have frequencies >= 100.
+# You do NOT need to change this function -- it should work as is.
+def display_results(word_frequencies):
+    # print(word_frequencies)
+    if word_frequencies:  # Check to see if word_frequencies has key/value entries
+        sorted_by_frequency = ((k, word_frequencies[k]) for k in sorted(word_frequencies, key=word_frequencies.get, reverse=True))
+        print("\nWords with frequencies >= 100")
+        print(format('WORD', '<15'), format('FREQUENCY', '>12'))
+        for k, v in sorted_by_frequency:
+            if v >= 100:
+                print(format(k, '<12'), format(v, '>10'))
+    else:
+        print('No word frequencies found')
+
+main()
